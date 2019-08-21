@@ -1,6 +1,10 @@
 import React, { Component } from 'react';
 import {connect} from 'react-redux';
 import {updateDomainData} from '../action-creators/update-domain-data';
+import * as styles from './domain-table.module.scss';
+
+const sortDomainListBasedOnCreatedBy = (domainList, property) => domainList.sort((a, b) => 
+      new Date(a[property]).getTime() - new Date(b.scheduled_for).getTime()).reverse();
 
 class DomainTableBase extends Component {
   state = {
@@ -13,16 +17,18 @@ class DomainTableBase extends Component {
 
   render() {
     const { domainData } = this.props;
-    console.dir(domainData)
+
+    sortDomainListBasedOnCreatedBy(domainData, 'createdAt');
+
     return (
-        <ul>
+        <ul className={styles.domainTable}>
         {
             domainData.length <= 0 ? 
-            'NO DB ENTRIES YET' : domainData.map((item, index) => 
+            'PLEASE USE THE DOMAIN FORM TO ENTER A DOMAIN NAME AND DESCRIPTION' : domainData.map((item, index) => 
             (
-                <li style={{ padding: '10px' }} key={index}>
-                  <span style={{ color: 'gray' }}> name: </span> {item.name} <br />
-                  <span style={{ color: 'gray' }}> description </span>
+                <li key={index}>
+                  <span> name: </span> {item.name} <br />
+                  <span> description </span>
                   {item.description}
                 </li>
             ))

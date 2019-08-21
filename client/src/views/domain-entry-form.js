@@ -1,7 +1,8 @@
 // /client/App.js
 import React, { Component } from 'react';
 import axios from 'axios';
-import {} from '../action-creators/update-domain-data'
+import {} from '../action-creators/update-domain-data';
+import * as styles from './domain-entry-form.module.scss';
 
 export class DomainEntryForm extends Component {
   state = {
@@ -23,25 +24,32 @@ export class DomainEntryForm extends Component {
 
   render() {
     return (
-      <React.Fragment>
+      <section className={styles.domainEntryForm}>
+          <label className={styles.domainNameLabel}>Enter domain name</label>
           <input
+            className={styles.domainName}
             type="text"
             onChange={(e) => this.setState({ name: e.target.value })}
             placeholder="enter the domain name"
-            style={{ width: '200px' }}
             value={this.state.name}
           />
-          <input
+          <label className={styles.domainDescriptionLabel}>Enter domain description</label>
+          <textarea
+            className={styles.domainDescription}
             type="text"
             onChange={(e) => this.setState({ description: e.target.value })}
             placeholder="enter the domain description"
-            style={{ width: '200px' }}
+            rows={10}
             value={this.state.description}
           />
-          <button onClick={() => this.putDataToDB(this.state.name, this.state.description)}>
+          <button 
+            className={styles.addButton}
+            disabled={!this.state.name || !this.state.description}
+            onClick={() => this.putDataToDB(this.state.name, this.state.description)}
+          >
             ADD
           </button>  
-      </React.Fragment>
+      </section>
     );
   }
 }
