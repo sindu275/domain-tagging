@@ -27,7 +27,6 @@ export class DomainEntryForm extends Component {
       <section className={styles.domainEntryForm}>
           <label className={styles.domainNameLabel}>Enter domain name</label>
           <input
-            className={styles.domainName}
             type="text"
             onChange={(e) => this.setState({ name: e.target.value })}
             placeholder="enter the domain name"
@@ -42,13 +41,13 @@ export class DomainEntryForm extends Component {
             rows={10}
             value={this.state.description}
           />
-          <button 
+          <button
             className={styles.addButton}
             disabled={!this.state.name || !this.state.description}
             onClick={() => this.putDataToDB(this.state.name, this.state.description)}
           >
             ADD
-          </button>  
+          </button>
       </section>
     );
   }

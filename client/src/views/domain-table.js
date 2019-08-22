@@ -2,8 +2,10 @@ import React, { Component } from 'react';
 import {connect} from 'react-redux';
 import {updateDomainData} from '../action-creators/update-domain-data';
 import * as styles from './domain-table.module.scss';
+import {DomainTableHeader} from './domain-table-header';
+import {DomainTableRows} from './domain-table-rows';
 
-const sortDomainListBasedOnCreatedBy = (domainList, property) => domainList.sort((a, b) => 
+const sortDomainListBasedOnCreatedBy = (domainList, property) => domainList.sort((a, b) =>
       new Date(a[property]).getTime() - new Date(b.scheduled_for).getTime()).reverse();
 
 class DomainTableBase extends Component {
@@ -21,19 +23,16 @@ class DomainTableBase extends Component {
     sortDomainListBasedOnCreatedBy(domainData, 'createdAt');
 
     return (
-        <ul className={styles.domainTable}>
-        {
-            domainData.length <= 0 ? 
-            'PLEASE USE THE DOMAIN FORM TO ENTER A DOMAIN NAME AND DESCRIPTION' : domainData.map((item, index) => 
-            (
-                <li key={index}>
-                  <span> name: </span> {item.name} <br />
-                  <span> description </span>
-                  {item.description}
-                </li>
-            ))
-        }
-      </ul>
+        <section className={styles.domainTable}>
+          {
+            domainData.length <= 0 ?
+            'PLEASE USE THE DOMAIN FORM TO ENTER A DOMAIN NAME AND DESCRIPTION' :
+                <table>
+                  <DomainTableHeader/>
+                  <DomainTableRows tableItems={domainData}/>
+                </table>
+          }
+      </section>
     );
   }
 }

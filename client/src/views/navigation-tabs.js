@@ -1,9 +1,8 @@
 import { Link } from "react-router-dom";
 import React from "react";
-import './navigation-tabs';
 import styles from './navigation-tabs.module.scss';
 
-export const NavigationTabs = () => 
+export const NavigationTabs = () =>
 <nav className={styles.navigationTabs}>
   <ul className={styles.navigationTabList}>
     <li>

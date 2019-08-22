@@ -3,19 +3,7 @@
     border: 1px solid gray;
     display: flex;
     flex-direction: column;
-    // display: grid;
-    // grid-gap: 10px;
-    // grid-template-areas: 
-    //         'domain-name-label domain-name'
-    //         'domain-description-label domain-description'
-    //         'add-button .';
-    // grid-template-columns: 1fr 2fr;
-    // grid-template-rows: auto;
     padding: 20px;
-}
-
-.domainName {
-    grid-area: domain-name;
 }
 
 .domainDescription {
