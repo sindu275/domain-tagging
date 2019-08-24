@@ -6,7 +6,7 @@ import {DomainTableHeader} from './domain-table-header';
 import {DomainTableRows} from './domain-table-rows';
 
 const sortDomainListBasedOnCreatedBy = (domainList, property) => domainList.sort((a, b) =>
-      new Date(a[property]).getTime() - new Date(b.scheduled_for).getTime()).reverse();
+      new Date(a[property]).getTime() - new Date(b[property]).getTime()).reverse();
 
 class DomainTableBase extends Component {
   state = {
