@@ -11,7 +11,7 @@ app.use(cors());
 const router = express.Router();
 
 const dbRoute =
-  'mongodb+srv://domainUser:domainPassword@domaincluster-hzl4n.mongodb.net/domainTable?authSource=admin';
+  'mongodb+srv://domainUser:domainPassword@domaincluster-hzl4n.mongodb.net/domainDB?authSource=admin';
 
 mongoose.connect(dbRoute, { useNewUrlParser: true }).then(() => {
   console.log("Connected to Database");
@@ -45,18 +45,29 @@ router.get('/getDomainData', (req, res) => {
 });
 
 router.post('/addDomainName', (req, res) => {
-  const { description, name } = req.body;
-  const domainCollection = new DomainData({
-    description,
-    name
+  const { description, isValid, name } = req.body;
+  let query  = DomainData.where({name});
+  query.findOne(function (err, domain) {
+    if (err) return handleError(err);
+    if(domain) {
+      DomainData.findByIdAndUpdate(domain._id, {description}, (err) => {
+        if (err) return res.json({ success: false, error: err });
+          return res.json({ success: true });
+        });
+      } else {
+        const domainCollection = new DomainData({
+          description,
+          isValid,
+          name
+        });
+
+        domainCollection.save((err) => {
+          if (err) return res.json({ success: false, error: err });
+          return res.json({ success: true , domainCollection});
+        });
+      }
+    });
   });
-  console.log(domainCollection);
-  domainCollection.save((err) => {
-    if (err) return res.json({ success: false, error: err });
-    console.log(domainCollection)
-    return res.json({ success: true , domainCollection});
-  });
-});
 
 app.use('/api', router);
 

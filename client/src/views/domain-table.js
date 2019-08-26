@@ -20,7 +20,9 @@ class DomainTableBase extends Component {
   render() {
     const { domainData } = this.props;
 
-    sortDomainListBasedOnCreatedBy(domainData, 'createdAt');
+    const validDomainData = domainData.filter(item => item.isValid);
+
+    sortDomainListBasedOnCreatedBy(validDomainData, 'createdAt');
 
     return (
         <section className={styles.domainTable}>
@@ -29,7 +31,7 @@ class DomainTableBase extends Component {
             'PLEASE USE THE DOMAIN FORM TO ENTER A DOMAIN NAME AND DESCRIPTION' :
                 <table>
                   <DomainTableHeader/>
-                  <DomainTableRows tableItems={domainData}/>
+                  <DomainTableRows tableItems={validDomainData}/>
                 </table>
           }
       </section>

@@ -4,6 +4,7 @@ const Schema = mongoose.Schema;
 const DomainDataSchema = new Schema(
   {
     description: String,
+    isValid: Boolean,
     name: String
   },
   { timestamps: true }

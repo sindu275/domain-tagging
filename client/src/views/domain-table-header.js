@@ -1,9 +1,9 @@
 import React from "react";
 import './navigation-tabs';
-import styles from './navigation-tabs.module.scss';
 
 export const DomainTableHeader = () =>
-    <tr>
+    <thead><tr>
       <th>Domain Name</th>
       <th>Domain Description</th>
-    </tr>;
+      <th>Submission Date</th>
+    </tr></thead>;

@@ -37,3 +37,11 @@
 .domainDescriptionLabel {
     grid-area: domain-description-label
 }
+
+.domainNameInput {
+    height: 20px;
+}
+
+.inputError {
+    border: 1px solid red;
+}
